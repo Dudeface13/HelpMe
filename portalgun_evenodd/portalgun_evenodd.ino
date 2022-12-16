@@ -35,25 +35,22 @@ void loop() {
   // If the button is pressed and enough time has passed since the last press
   if (ButtonState1 == LOW && currentTime - lastPressTime >= debounceTime) {
     // Increment the presscount variable
-  
     presscount++;
 
     // Update the lastPressTime variable with the current time
     lastPressTime = currentTime;
+    
+    // Check if the presscount variable is even or odd
+    if (presscount % 2 == 0) {
+      // If it's even, set all the LEDs to orange
+      FastLED.clear();
+      fill_solid(leds, NUM_LEDS, CRGB(255, 50, 0));
+      FastLED.show();
+    } else {
+      // If it's odd, set all the LEDs to blue
+      FastLED.clear();
+      fill_solid(leds, NUM_LEDS, CRGB(0, 0, 255));
+      FastLED.show();
+    }
   }
-
-  // Check if the presscount variable is even or odd
-  if (presscount % 2 == 0) {
-    // If it's even, set all the LEDs to orange
-    FastLED.clear();
-    fill_solid(leds, NUM_LEDS, CRGB(255, 50, 0));
-    FastLED.show();
-  } else {
-    // If it's odd, set all the LEDs to blue
-    FastLED.clear();
-    fill_solid(leds, NUM_LEDS, CRGB(0, 0, 255));
-    FastLED.show();
-  }
-
- 
 }
